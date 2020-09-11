@@ -1,28 +1,34 @@
+import 
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+   <div class="nav-bar"></div>
+      <div class="product-display">
+        <div class="product-container">
+          <div class="product-image">
+            <img v-bind:src="image">
+          </div>
+          <div class="product-info">
+            <h1>{{ product }}</h1>
+            <a :href="cheatUrl" target="_blank">CheatSheet</a>
+          </div>
+        </div>
+      </div> 
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
+  data() {
+    return {
+      product: 'socks',
+      image: 'https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg',
+      cheatUrl: 'https://www.vuemastery.com/pdf/Vue-Essentials-Cheat-Sheet.pdf',
+    }
+  },
   name: 'App',
   components: {
-    HelloWorld
+  
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
