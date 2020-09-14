@@ -28,11 +28,15 @@
             </button>
           </div>
         </div>
+        <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+        <review-form @review-submitted="addReview"></review-form>
       </div> 
 </template>
 
 <script>
 import productDetails from "./ProductDetails.vue"
+import ReviewForm from "./ReviewForm.vue"
+import ReviewList from "./ReviewList.vue"
 import greenImage from "../assets/images/green.jpg"
 import blueImage from "../assets/images/blue.jpg"
 export default {
@@ -44,7 +48,9 @@ export default {
     }
   },
   components: {
-    productDetails
+    productDetails,
+    ReviewForm,
+    ReviewList
   },
   data() {
     return {
@@ -56,15 +62,19 @@ export default {
         {id: 2234, color: 'green', image: greenImage, quantity: 50},
         {id: 2235, color: 'blue', image: blueImage, quantity: 0}
       ],
-      sizes: ['small', 'shmedium', 'smlarge']
+      sizes: ['small', 'shmedium', 'smlarge'],
+      reviews: []
     }
   },
   methods: {
     addToCart() {
-      this.cart++
+      this.$emit('add-to-cart', this.variants[this.selectedVariant].id)
     },
     updateVariant(index) {
       this.selectedVariant = index
+    },
+    addReview(review) {
+      this.reviews.push(review)
     }
   },
   computed: {
